@@ -1,0 +1,32 @@
+[
+  {
+    "sourceKey": "ccgp",
+    "sourcePlatform": "中国政府采购网",
+    "url": "https://www.ccgp.gov.cn/cggg/dfgg/gkzb/202611/t20261104_27621894.htm",
+    "discoveredBy": "已知验证样本",
+    "query": "用户指定样本",
+    "scope": "仅用于端到端回归验证，不代表平台检索覆盖",
+    "province": "四川省",
+    "regionCode": "510000"
+  },
+  {
+    "sourceKey": "ccgp",
+    "sourcePlatform": "中国政府采购网",
+    "url": "https://www.ccgp.gov.cn/cggg/zygg/gkzb/202611/t20261101_27598618.htm",
+    "discoveredBy": "公开搜索种子",
+    "query": "site:ccgp.gov.cn/cggg/ 5G核心网",
+    "scope": "公开搜索引擎已索引页面；非中国政府采购网全量",
+    "province": "辽宁省",
+    "regionCode": "210000"
+  },
+  {
+    "sourceKey": "ccgp",
+    "sourcePlatform": "中国政府采购网",
+    "url": "https://www.ccgp.gov.cn/cggg/dfgg/gkzb/202611/t20261103_27612815.htm",
+    "discoveredBy": "公开搜索种子",
+    "query": "site:ccgp.gov.cn/cggg/ 5G专网",
+    "scope": "公开搜索引擎已索引页面；非中国政府采购网全量",
+    "province": "北京市",
+    "regionCode": "110000"
+  }
+]

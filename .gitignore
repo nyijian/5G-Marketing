@@ -1,0 +1,22 @@
+node_modules/
+.pnpm-store/
+dist/
+data/*.sqlite
+data/*.sqlite-*
+data/raw/
+output/*.xlsx
+output/*.json
+coverage/
+.env
+*.log
+
+!data/.gitkeep
+!output/.gitkeep
+
+# 公开仓库：本地数据与内部资料不提交
+/*.xlsx
+~$*
+CON
+output/*
+!output/.gitkeep
+analysis/*.html

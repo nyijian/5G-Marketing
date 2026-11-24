@@ -1,0 +1,31 @@
+{
+  "name": "5g-private-network-tender-monitor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "中国公开5G定制网、5G行业专网采购机会监测工具",
+  "type": "module",
+  "engines": {
+    "node": ">=22.5.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "collect": "tsx src/cli.ts collect",
+    "validate:sample": "tsx src/cli.ts validate-sample",
+    "export": "tsx src/cli.ts export",
+    "audit:historical": "tsx src/audit-historical.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check": "pnpm typecheck && pnpm test"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "exceljs": "^4.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.13"
+  },
+  "packageManager": "pnpm@12.18.0"
+}

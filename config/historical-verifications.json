@@ -1,0 +1,246 @@
+[
+  {
+    "match": "自贡市妇幼保健院东部新城院区5G网络建设",
+    "status": "官网已核实",
+    "sourcePlatform": "自贡市妇幼保健院",
+    "officialUrl": "https://www.zgsfybjy.cn/xwzx_tzgg_zbjg-View-45-58912.html",
+    "clueUrl": "https://www.czhaobiao.com/nav_9830_6107_3.html",
+    "verifiedWinner": "中国移动通信集团四川有限公司自贡分公司",
+    "note": "院方官网核实：2026-03-16发布结果，项目为东部新城院区5G网络建设，成交供应商为四川移动自贡分公司；官网未披露项目编号或成交金额。"
+  },
+  {
+    "match": "云南公司观音岩水电站5G专网信号新增覆盖",
+    "status": "第三方线索",
+    "sourcePlatform": "大唐智慧寻源（官方入口受限）",
+    "projectNumber": "P-DY-26-00000857",
+    "officialUrl": "https://xy.cdt-ec.com/search/sj/nonTender",
+    "clueUrl": "https://m.bidcenter.com.cn/zhaobiao/zbkeyw-38355-530100.html",
+    "note": "第三方可确认2026-05-11直接采购线索；大唐官方检索未登录返回401，成交方和金额尚未由官网核实。"
+  },
+  {
+    "match": "云南公司观音岩水电观音岩水电站5G网络传输",
+    "status": "未定位",
+    "sourcePlatform": "大唐智慧寻源",
+    "officialUrl": "https://xy.cdt-ec.com/search/sj/nonTender",
+    "note": "官方入口及公开搜索均未找到对应2026公告、项目编号或结果。"
+  },
+  {
+    "match": "大竹分厂2026年工业5G网络技术及UWB定位",
+    "status": "疑似错误记录",
+    "sourcePlatform": "中国石油新闻中心",
+    "officialUrl": "https://news.cnpc.com.cn/system/2023/09/12/030112254.shtml",
+    "note": "目前权威材料是2023年既有建设案例，未找到2026采购或成交公告；不宜当作2026中标项目。"
+  },
+  {
+    "match": "映秀湾、渔子溪、耿达三座电站及闸首5G专网运维",
+    "status": "第三方线索",
+    "sourcePlatform": "国家电网ECP（具体包未定位）",
+    "officialUrl": "https://ecp.sgcc.com.cn/ecp2.0/portal/#/",
+    "clueUrl": "https://www.gxzbcg.com.cn/dlcgxx/119618.html",
+    "note": "只定位到2026年第一次非物资授权采购批次线索；具体包、成交方和金额未由官网核实。"
+  },
+  {
+    "match": "四川省港航投资集团有限责任公司5G专网安全及任务移动督办系统",
+    "status": "官网部分核实",
+    "sourcePlatform": "四川省港航投资集团交易管理服务平台",
+    "projectNumber": "CRFQ-2025-S00028 / TC25960FC",
+    "officialUrl": "http://jymh.spsigroup.com.cn/noticeDetail?ggid=14e6c9cb-0085-52b4-7162-432efc0cb33d",
+    "verifiedAmount": 2451128,
+    "verifiedWinner": "第一中标候选人：中国移动通信集团四川有限公司",
+    "note": "官网核实到2026-01-15候选公示及报价，尚未找到最终结果公告，不能把候选人直接写成确定中标人。"
+  },
+  {
+    "match": "集团5G专网安全及任务移动督办系统",
+    "status": "重复记录/官网部分核实",
+    "sourcePlatform": "四川省港航投资集团交易管理服务平台",
+    "projectNumber": "CRFQ-2025-S00028 / TC25960FC",
+    "officialUrl": "http://jymh.spsigroup.com.cn/noticeDetail?ggid=14e6c9cb-0085-52b4-7162-432efc0cb33d",
+    "verifiedAmount": 2451128,
+    "verifiedWinner": "第一中标候选人：中国移动通信集团四川有限公司",
+    "note": "与完整标题的港投项目高度一致，原清单日期1月29日尚未由最终结果公告支持。"
+  },
+  {
+    "match": "四川川锅锅炉有限责任公司5G工控专网",
+    "status": "第三方线索",
+    "sourcePlatform": "未识别原始采购平台",
+    "projectNumber": "202602030141",
+    "clueUrl": "https://m.bidcenter.com.cn/zhaobiao/areanew_1052_510121_1/",
+    "verifiedAmount": 610624,
+    "verifiedWinner": "第三方称：中国移动通信集团四川有限公司成都分公司",
+    "note": "第三方完整正文支持2026-02-12、四川移动成都分公司、610,624元及服务期3年（物联网卡部分据实结算）；川锅官网未找到采购栏目或原公告，保持待核实。"
+  },
+  {
+    "match": "某单位5G网络建设及数智化改造",
+    "status": "未定位",
+    "sourcePlatform": "公开网络及运营商采购平台",
+    "note": "按完整标题、2026-06-23、42,969元及4.2969万元等组合检索，未找到可唯一对应的公开公告；原始Excel也没有链接、批注、项目编号或采购人，匿名信息不足，不能反推客户。"
+  },
+  {
+    "match": "某单位5G区网络安全综合服务",
+    "status": "未定位",
+    "sourcePlatform": "公开网络及运营商采购平台",
+    "note": "按完整标题、5G网络安全综合服务、2026-07-02和175,000元等组合检索，未找到同时匹配乐山、日期和金额的页面；“5G区”还可能是录入错误，不能据此猜测采购人。"
+  },
+  {
+    "match": "四川罗江经济开发区管理委员会罗江经开区5G+智慧园区",
+    "status": "官网已核实",
+    "sourcePlatform": "四川政府采购网",
+    "projectNumber": "N5106042026000030",
+    "officialUrl": "https://www.ccgp-sichuan.gov.cn/maincms-web/article?type=notice&id=c3fdc3e1-aa3a-4de2-b851-c8de625202f3&planId=8a69d5b19cf8f15a019cf9ce7ffb1c67&channel=c5bff13f-21ca-4dac-b158-cb40accd3035",
+    "clueUrl": "https://www.ccgp-sichuan.gov.cn/maincms-web/article?type=notice&id=7e618077-7606-47b9-bc56-29bba5b863c1&planId=8a69d5b19cf8f15a019cf9ce7ffb1c67&channel=c5bff13f-21ca-4dac-b158-cb40accd3035",
+    "verifiedAmount": 867885,
+    "verifiedWinner": "中国移动通信集团四川有限公司德阳分公司",
+    "note": "官网核实：预算/最高限价100万元；2026-04-30成交867,885元。"
+  },
+  {
+    "match": "四川振鹰科技有限公司5G专网服务",
+    "status": "未定位",
+    "sourcePlatform": "四川招投标网（待继续核验）",
+    "officialUrl": "https://www.scbid.com/search_page/zh/search",
+    "note": "公开搜索未找到可打开的原始结果页；原清单中的供应商和94万元金额暂未得到独立支持。"
+  },
+  {
+    "match": "四川凌曜半导体有限公司5G专网服务",
+    "status": "平台线索",
+    "sourcePlatform": "四川招投标网",
+    "officialUrl": "https://m.scbid.com/bx/detail/7076247509_4203638.html",
+    "note": "平台确认项目标题及2026-06-30发布日期，但正文会员可见；原清单的6月29日、成交方和58万元尚未完整核实。"
+  },
+  {
+    "match": "四川亿航实业有限公司5G+智慧办公",
+    "status": "第三方线索/日期有差异",
+    "sourcePlatform": "原始平台未识别",
+    "projectNumber": "WZ2025TP-034",
+    "clueUrl": "https://www.bidcenter.com.cn/zhaobiao/areanew_1053_511303_1/",
+    "verifiedAmount": 324000,
+    "verifiedWinner": "第三方称：中国电信股份有限公司南充分公司",
+    "note": "第三方正文支持项目编号、供应商和324,000元，但显示结果日期2026-01-05，与原清单1月7日不一致。"
+  },
+  {
+    "match": "内江市卫生健康委员会内江市卫生健康委员会5G+医疗健康远程医疗专网链路",
+    "status": "官网已核实",
+    "sourcePlatform": "内江市卫生健康委员会",
+    "officialUrl": "https://www.neijiang.gov.cn/wsj/xxgk/fdzdgknr/zfcgyztb/202603/17ba330728844e9e8e3f58a57a51538e.shtml",
+    "clueUrl": "https://www.neijiang.gov.cn/wsj/xxgk/fdzdgknr/zfcgyztb/202603/9b845b19b3f141f2b879aa3e08d7fe8e.shtml",
+    "verifiedAmount": 12000,
+    "verifiedWinner": "中国移动通信集团四川有限公司内江分公司",
+    "note": "卫健委官网核实：2026-03-10比选结果成交12,000元。3月4日采购公告预算/最高限价1.92万元/年、服务期3年，报名截止3月9日18:00；详情meta迁移日期晚于正文，应以正文公开日期为准。"
+  },
+  {
+    "match": "广元市健康数字科技有限公司关于2025-2026年度5G物联网流量服务",
+    "status": "官网来源已识别/结果未核实",
+    "sourcePlatform": "广元市文化旅游康养发展集团招采公告",
+    "projectNumber": "SZKJ202601",
+    "officialUrl": "https://gywljt.cn/list.html?cls1=5&cls2=26",
+    "clueUrl": "https://www.bidcenter.com.cn/zhaobiao/areanew_1052_510802_1/",
+    "verifiedWinner": "拟定/第三方称：中国移动通信集团四川有限公司广元分公司",
+    "note": "已识别集团官方招采列表，但历史详情受云锁Cookie/WAF限制；第三方正文支持5月7日单一来源邀请、项目编号、拟邀四川移动广元分公司和5月12日结果标题。8.668万元是采购预算，不是已核实的成交价，结果金额保持为空。"
+  },
+  {
+    "match": "成都市新都区第二人民医院2026年医院网络服务",
+    "status": "官网已核实",
+    "sourcePlatform": "成都市新都区第二人民医院",
+    "officialUrl": "https://www.xdqdermyy.com/go-a1465.htm",
+    "verifiedAmount": 34032,
+    "verifiedWinner": "中国移动通信集团四川有限公司成都分公司",
+    "note": "院方官网核实：2026-03-12结果公示，成交价3.4032万元。"
+  },
+  {
+    "match": "成都市新都区第三人民医院5G物联网卡采购",
+    "status": "官网已核实",
+    "sourcePlatform": "成都市新都区第三人民医院",
+    "officialUrl": "https://xdqdsrmyy.com/home/news/view/id/1038.html",
+    "verifiedAmount": 20160,
+    "verifiedWinner": "中国电信股份有限公司成都分公司",
+    "note": "院方官网核实：2026-02-04结果公告，成交20,160元。"
+  },
+  {
+    "match": "布拖县统计局5G农普服务",
+    "status": "第三方线索",
+    "sourcePlatform": "原始PDF发布平台未识别",
+    "clueUrl": "https://www.qianlima.com/bid-607058235.html",
+    "verifiedAmount": 127800,
+    "note": "第三方页面含结果公告PDF线索和127,800元金额；成交单位与原始发布页仍待核实。"
+  },
+  {
+    "match": "泸州市人民医院2026通信与5G网络建设服务",
+    "status": "官网已核实/结果为候选公示",
+    "sourcePlatform": "泸州市人民医院",
+    "projectNumber": "LZSRMYYCG2026（021）",
+    "officialUrl": "http://www.lzsry.com/go.htm?url=xqy&k=zhao_biao_gong_gao&id=12441",
+    "clueUrl": "http://www.lzsry.com/go.htm?url=xqy&k=zhao_biao_gong_gao&id=12434",
+    "verifiedWinner": "包2第一成交候选人：中国移动通信集团四川有限公司泸州分公司",
+    "note": "官网采购公告发布于2026-06-01，共2包；包2为市府路院区5G专网建设服务，最高限价15万元，获取文件2026-06-02至06-04，响应截止2026-06-05 15:30。6月8日结果页仅公布第一成交候选人，未披露成交价；原清单金额0应解释为未公开，不是零元成交。"
+  },
+  {
+    "match": "5G+医疗健康专线服务项目院内",
+    "status": "官网已核实/日期含义有差异",
+    "sourcePlatform": "乐山市人民医院",
+    "officialUrl": "https://www.leshan-hospital.com.cn/aspx/view_349D201D3B7CC447.html",
+    "verifiedAmount": 77400,
+    "verifiedWinner": "中国移动通信集团四川有限公司乐山分公司",
+    "note": "院方官网页面发布于2026-01-13；正文说明1月9日开标，中标价2.58万元/年、三年7.74万元。原清单1月9日是开标日，不是公告发布日期。"
+  },
+  {
+    "match": "5G+医疗健康远程应用专线项目询价结果公示",
+    "status": "官网已核实/原清单日期有误",
+    "sourcePlatform": "成都市金牛区人民医院",
+    "projectNumber": "SBXH2026L007",
+    "officialUrl": "http://www.scjn120.com/go.htm?url=news_detail&id=7070",
+    "clueUrl": "http://www.scjn120.com/go.htm?url=news_detail&id=7040",
+    "verifiedWinner": "中国移动通信集团四川有限公司成都分公司",
+    "note": "院方官网采购公告发布于2026-06-15，响应截止2026-06-19 17:00，预算4,800元；结果公示发布于2026-06-23，未公开成交金额。原清单7月8日与官网结果发布日期不一致；院方后续曾复用同一编号，匹配时必须同时核对标题。"
+  },
+  {
+    "match": "5G医疗健康专线",
+    "exact": true,
+    "status": "官网已核实",
+    "sourcePlatform": "四川省妇幼保健院",
+    "officialUrl": "https://www.scsfybjy.cn/tender_sub/2026/RdGwOJdD.html",
+    "clueUrl": "https://www.scsfybjy.cn/tender_sub/2026/QeZZKQep.html",
+    "verifiedAmount": 9456,
+    "verifiedWinner": "中国联合网络通信有限公司成都市分公司",
+    "note": "院方官网核实：采购公告2026-05-09发布，预算2万元；2026-05-20询价结果总金额9,456元，采购内容为5G医疗健康专线1年，采购部门为信息化部。"
+  },
+  {
+    "match": "院内会议系统及5G项目运维服务",
+    "status": "官网已核实/原清单日期有差异",
+    "sourcePlatform": "四川省妇幼保健院",
+    "projectNumber": "2025-XXHB-DS-006(磋)",
+    "officialUrl": "https://www.scsfybjy.cn/tender_sub/2026/0dN70DeL.html",
+    "clueUrl": "https://www.scsfybjy.cn/tender_sub/2025/7e5A78e2.html",
+    "verifiedAmount": 88600,
+    "verifiedWinner": "中国移动通信集团四川有限公司",
+    "note": "院方官网结果发布于2026-01-09（原清单为1月10日），竞争性磋商，成交总额88,600元，服务期限1年；采购会议公告于2025-12-29发布，响应/会议截止2026-01-07 09:00。"
+  },
+  {
+    "match": "基于5G网络布局结构优化调整",
+    "status": "官网已核实",
+    "sourcePlatform": "东方电气供应链门户",
+    "projectNumber": "contentId ec29f571-f4a9-49d6-9636-8dc3bbbabcbd / RFQID 9437d592-c34b-a177-3c5d-f08baa863904",
+    "officialUrl": "https://nsrm.dongfang.com/platform/runtime/epp/designer/index.html#/eprocurementportal/detail?columnId=cgjggg&type=fzbxx&contentId=ec29f571-f4a9-49d6-9636-8dc3bbbabcbd",
+    "verifiedWinner": "中国电信股份有限公司德阳分公司",
+    "note": "东方电气官方采购门户接口核实：2026-05-19 14:12:25发布，采购单位为东方电气集团数字科技有限公司，成交供应商为中国电信德阳分公司；公告未披露成交金额，原清单0应解释为未公开。"
+  },
+  {
+    "match": "炼铁站铁租赁5G无线通信网络服务",
+    "status": "官网已核实",
+    "sourcePlatform": "鞍钢智慧招投标平台",
+    "projectNumber": "ZXAGSZFZYHD251230259687",
+    "officialUrl": "https://bid.ansteel.cn/zbjjxx/001004/20260112/2556edf8-003a-4954-a493-62f1452933f2.html",
+    "clueUrl": "https://bid.ansteel.cn/zbjjxx/001003/20260109/da8d0e31-2869-4505-bdea-3773ec3ede25.html",
+    "verifiedWinner": "中国移动通信集团四川有限公司攀枝花分公司",
+    "note": "官网最终结果日期为2026-01-12，原清单的2026-01-09是候选公示日期；官网未披露金额。"
+  },
+  {
+    "match": "极深地下极低辐射本底前沿物理实验设施5G信号覆盖",
+    "status": "官网已核实",
+    "sourcePlatform": "国投集团电子采购平台",
+    "projectNumber": "000645-26XB0205 / 01",
+    "officialUrl": "https://www.sdicc.com.cn/cgxx/zbjgDetail?bdGuid=ead522ee-6fd1-4653-8cef-61b8419ce6f8&guid=12c204ac-975f-45a6-aa4d-eaeb430b9316",
+    "clueUrl": "https://www.sdicc.com.cn/cgxx/ggDetail?gcGuid=1faa6d19-94ad-4ba0-8317-37780e737ac7&ggGuid=68af623b-dba4-4ff7-892b-6d5ad9770b0d",
+    "verifiedAmount": 56928,
+    "verifiedWinner": "中国移动通信集团四川有限公司凉山分公司",
+    "note": "公告和结果均由官网核实；文件截止2026-03-04 18:00，响应截止2026-03-09 09:30，结果2026-03-27。"
+  }
+]
