@@ -2,7 +2,7 @@ import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import ExcelJS from "exceljs";
-import { databasePath } from "./config.js";
+import { databasePath, loadBuyerSites } from "./config.js";
 
 interface DbNotice {
   title: string;
@@ -48,16 +48,19 @@ interface PlatformCatalogEntry {
   collectionStatus: string;
   authoritative: boolean;
   scope: string;
+  domains: string[];
+  evidenceRows: number[];
   notes: string;
 }
 
-interface VerificationSiteEntry {
+interface ClueSiteEntry {
   id: string;
   name: string;
-  url: string;
-  mappingStatus: string;
-  mappedPlatformIds: string[];
-  verifiedProject?: string;
+  domains: string[];
+  kind: string;
+  collectionStatus: string;
+  access: string;
+  evidenceRows: number[];
   notes: string;
 }
 
@@ -250,7 +253,7 @@ async function main(): Promise<void> {
     ["状态说明", "“官网原文已定位（自动）”是按日期和标题匹配到已采集的官方页面；“官网已核实”是人工核对；第三方线索不能等同官网确认。"],
     ["金额说明", "原清单金额与官网金额分别保留；0通常表示原清单未填金额，不表示零元成交。"],
     ["日期说明", "原清单日期可能是候选公示日期而非最终结果日期，差异写在核验说明中。"],
-    ["来源口径", "招标发布平台与采购人官网分开记录；采购人官网只用于原文核验，不计入平台覆盖。"],
+    ["来源口径", "招标发布平台、采购人官网和第三方线索站分三张表记录；采购人官网作为长尾来源自动监测但不计入平台覆盖；第三方线索站只供人工回溯原文。各表“核验样本序号”对应本表37条样本。"],
   ]);
   summary.columns = [{ width: 36 }, { width: 110 }];
   summary.eachRow((row) => { row.alignment = { vertical: "top", wrapText: true }; });
@@ -267,6 +270,8 @@ async function main(): Promise<void> {
     { header: "采集状态", key: "collectionStatus", width: 20 },
     { header: "是否权威原始平台", key: "authoritative", width: 18 },
     { header: "覆盖范围", key: "scope", width: 42 },
+    { header: "域名", key: "domains", width: 28 },
+    { header: "核验样本序号", key: "evidenceRows", width: 18 },
     { header: "平台入口", key: "url", width: 16 },
     { header: "说明", key: "notes", width: 65 },
   ];
@@ -274,32 +279,54 @@ async function main(): Promise<void> {
     platformSheet.addRow({
       ...entry,
       authoritative: entry.authoritative ? "是" : "否/市场化平台",
+      domains: entry.domains.join("\n"),
+      evidenceRows: entry.evidenceRows.join("、"),
       url: { text: "打开平台", hyperlink: entry.url },
     });
   }
 
-  const verificationCatalog = JSON.parse(
-    await readFile("config/verification-sites.json", "utf8"),
-  ) as { sites: VerificationSiteEntry[] };
-  const verificationSheet = workbook.addWorksheet("采购人官网反查");
-  verificationSheet.columns = [
+  const buyerSites = await loadBuyerSites();
+  const buyerSheet = workbook.addWorksheet("采购人官网采集与反查");
+  buyerSheet.columns = [
     { header: "站点ID", key: "id", width: 28 },
     { header: "采购人/栏目", key: "name", width: 32 },
-    { header: "已核验项目", key: "verifiedProject", width: 52 },
-    { header: "平台反查状态", key: "mappingStatus", width: 22 },
-    { header: "已确认对应平台ID", key: "mappedPlatformIds", width: 28 },
+    { header: "地区", key: "region", width: 12 },
+    { header: "采集状态", key: "collectionStatus", width: 16 },
+    { header: "监测栏目", key: "lists", width: 60 },
+    { header: "已核验项目", key: "verifiedProject", width: 44 },
+    { header: "核验样本序号", key: "evidenceRows", width: 14 },
+    { header: "平台反查状态", key: "mappingStatus", width: 18 },
+    { header: "已确认对应平台ID", key: "mappedPlatformIds", width: 20 },
     { header: "采购人官网", key: "url", width: 16 },
-    { header: "反查说明", key: "notes", width: 80 },
+    { header: "说明", key: "notes", width: 80 },
   ];
-  for (const entry of verificationCatalog.sites) {
-    verificationSheet.addRow({
+  for (const entry of buyerSites) {
+    buyerSheet.addRow({
       ...entry,
+      lists: entry.collection?.lists.map((list) => `${list.name}：${list.url}`).join("\n") ?? "",
+      evidenceRows: entry.evidenceRows.join("、"),
       mappedPlatformIds: entry.mappedPlatformIds.join("、"),
       url: { text: "打开官网", hyperlink: entry.url },
     });
   }
 
-  for (const sheetToStyle of [platformSheet, verificationSheet]) {
+  const clueCatalog = JSON.parse(await readFile("config/clue-sites.json", "utf8")) as { sites: ClueSiteEntry[] };
+  const clueSheet = workbook.addWorksheet("第三方线索站");
+  clueSheet.columns = [
+    { header: "站点ID", key: "id", width: 16 },
+    { header: "名称", key: "name", width: 28 },
+    { header: "类型", key: "kind", width: 22 },
+    { header: "采集状态", key: "collectionStatus", width: 14 },
+    { header: "域名", key: "domains", width: 26 },
+    { header: "程序访问情况", key: "access", width: 40 },
+    { header: "核验样本序号", key: "evidenceRows", width: 14 },
+    { header: "说明", key: "notes", width: 80 },
+  ];
+  for (const entry of clueCatalog.sites) {
+    clueSheet.addRow({ ...entry, domains: entry.domains.join("\n"), evidenceRows: entry.evidenceRows.join("、") });
+  }
+
+  for (const sheetToStyle of [platformSheet, buyerSheet, clueSheet]) {
     sheetToStyle.views = [{ state: "frozen", ySplit: 1 }];
     sheetToStyle.autoFilter = { from: "A1", to: sheetToStyle.getRow(1).getCell(sheetToStyle.columnCount).address };
     sheetToStyle.getRow(1).eachCell((cell) => {

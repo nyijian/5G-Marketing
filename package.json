@@ -10,6 +10,8 @@
   },
   "scripts": {
     "collect": "tsx src/cli.ts collect",
+    "collect:daily": "tsx src/cli.ts collect --days 3",
+    "collect:full": "tsx src/cli.ts collect --site-pages 100",
     "validate:sample": "tsx src/cli.ts validate-sample",
     "export": "tsx src/cli.ts export",
     "audit:historical": "tsx src/audit-historical.ts",

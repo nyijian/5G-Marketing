@@ -34,6 +34,12 @@ export function normalizeCcgpUrl(value: string): string | null {
 function normalizeGenericOfficialUrl(value: string, sourceKey: SourceKey): string | null {
   try {
     const url = new URL(value);
+    if (sourceKey === "buyersite") {
+      // 官网域名已在buyer-sites.json中按站点限定；部分医院站只支持HTTP，保留原协议。
+      if (!/^https?:$/.test(url.protocol)) return null;
+      url.hash = "";
+      return url.href;
+    }
     const allowed =
       sourceKey === "ggzy"
         ? /(^|\.)ggzy\.gov\.cn$/i.test(url.hostname)

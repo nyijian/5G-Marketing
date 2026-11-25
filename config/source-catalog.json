@@ -10,6 +10,14 @@
     "authoritative": true,
     "scope": "中央及地方政府采购公告，四川按地区筛选",
     "priority": "高",
+    "domains": [
+      "www.ccgp.gov.cn",
+      "search.ccgp.gov.cn"
+    ],
+    "evidenceRows": [
+      6,
+      7
+    ],
     "notes": "站内全文检索，覆盖标题和正文。"
   },
   {
@@ -23,6 +31,18 @@
     "authoritative": true,
     "scope": "四川政府采购公告、结果、合同等",
     "priority": "高",
+    "domains": [
+      "www.ccgp-sichuan.gov.cn"
+    ],
+    "evidenceRows": [
+      2,
+      11,
+      13,
+      16,
+      18,
+      27,
+      28
+    ],
     "notes": "四川地方预算单位政府采购信息的省级分网；官方公开列表接口。"
   },
   {
@@ -36,6 +56,12 @@
     "authoritative": true,
     "scope": "全国公共资源交易信息，四川按地区筛选",
     "priority": "高",
+    "domains": [
+      "www.ggzy.gov.cn"
+    ],
+    "evidenceRows": [
+      37
+    ],
     "notes": "官方交易公开接口。"
   },
   {
@@ -49,6 +75,12 @@
     "authoritative": true,
     "scope": "四川依法必须招标项目及公共资源交易信息",
     "priority": "高",
+    "domains": [
+      "ggzyjy.sc.gov.cn"
+    ],
+    "evidenceRows": [
+      32
+    ],
     "notes": "四川依法必须招标项目的省指定发布媒介；已接入标题检索和详情。"
   },
   {
@@ -62,6 +94,10 @@
     "authoritative": true,
     "scope": "中国电信集团及四川相关采购",
     "priority": "高",
+    "domains": [
+      "caigou.chinatelecom.com.cn"
+    ],
+    "evidenceRows": [],
     "notes": "检索集团四川、终端四川和集成四川。"
   },
   {
@@ -75,6 +111,10 @@
     "authoritative": true,
     "scope": "四川国企阳光采购",
     "priority": "高",
+    "domains": [
+      "www.tfygcgfw.com"
+    ],
+    "evidenceRows": [],
     "notes": "采集器已实现公告、候选、结果、变更和终止；当前环境触发IP/滑块限制。"
   },
   {
@@ -88,6 +128,10 @@
     "authoritative": true,
     "scope": "四川能源集团采购",
     "priority": "高",
+    "domains": [
+      "scny.tfygcgfw.com"
+    ],
+    "evidenceRows": [],
     "notes": "与天府阳光共用采集器；当前环境触发IP/滑块限制。"
   },
   {
@@ -101,7 +145,14 @@
     "authoritative": true,
     "scope": "四川港投集团及下属企业采购",
     "priority": "高",
-    "notes": "免登录列表和详情接口已验证；命中5G专网安全及任务移动督办项目。"
+    "domains": [
+      "jymh.spsigroup.com.cn"
+    ],
+    "evidenceRows": [
+      12,
+      23
+    ],
+    "notes": "免登录列表和详情接口已验证；命中5G专网安全及任务移动督办项目。2026-11-25探测：noticeList和noticeDetail都是Vue单页应用（/static/js/app.*.js＋./config.js），HTML里没有公告数据；接入需从前端配置定位公告列表/详情接口。"
   },
   {
     "id": "sdic",
@@ -114,7 +165,13 @@
     "authoritative": true,
     "scope": "国投集团及雅砻江流域水电采购",
     "priority": "高",
-    "notes": "公开检索及详情可访问；已核验地下实验设施5G信号覆盖公告和结果。"
+    "domains": [
+      "www.sdicc.com.cn"
+    ],
+    "evidenceRows": [
+      24
+    ],
+    "notes": "公开检索及详情可访问；已核验地下实验设施5G信号覆盖公告和结果。2026-11-25探测：结果公告列表/cgxx/cgxxList?cgxxType=/ggList的数据由脚本加载；详情页zbjgDetail、ggDetail为服务端渲染，可直接读取。接入需定位列表数据接口。"
   },
   {
     "id": "ansteel",
@@ -127,7 +184,13 @@
     "authoritative": true,
     "scope": "鞍钢集团及攀枝花相关采购",
     "priority": "中",
-    "notes": "公开候选和结果页已验证；命中炼铁站5G无线通信网络服务。"
+    "domains": [
+      "bid.ansteel.cn"
+    ],
+    "evidenceRows": [
+      22
+    ],
+    "notes": "公开候选和结果页已验证；命中炼铁站5G无线通信网络服务。2026-11-25探测：首页可读；公开寻源列表/zbjjxx/bidding_purchase.html只是前端模板，数据由脚本加载，栏目目录直接访问返回403；详情页/zbjjxx/0010xx/日期/guid.html为静态HTML。接入需定位列表数据接口。"
   },
   {
     "id": "datang",
@@ -140,6 +203,13 @@
     "authoritative": true,
     "scope": "大唐集团招标及非招标采购",
     "priority": "高",
+    "domains": [
+      "xy.cdt-ec.com"
+    ],
+    "evidenceRows": [
+      3,
+      4
+    ],
     "notes": "观音岩项目的对应集团采购平台；匿名检索接口当前返回401。"
   },
   {
@@ -153,6 +223,12 @@
     "authoritative": true,
     "scope": "国家电网及四川电力采购",
     "priority": "高",
+    "domains": [
+      "ecp.sgcc.com.cn"
+    ],
+    "evidenceRows": [
+      8
+    ],
     "notes": "映秀湾等项目可能属于四川授权批次；具体标包常在附件，需补附件解析。"
   },
   {
@@ -166,6 +242,10 @@
     "authoritative": true,
     "scope": "四川国企采购",
     "priority": "高",
+    "domains": [
+      "www.swueecg.com"
+    ],
+    "evidenceRows": [],
     "notes": "适合补充四川国企市场化采购。"
   },
   {
@@ -179,6 +259,10 @@
     "authoritative": true,
     "scope": "中国联通及四川联通采购",
     "priority": "高",
+    "domains": [
+      "www.chinaunicombidding.cn"
+    ],
+    "evidenceRows": [],
     "notes": "官方平台；当前直接访问触发WAF。"
   },
   {
@@ -192,6 +276,10 @@
     "authoritative": true,
     "scope": "中国铁塔及四川铁塔采购",
     "priority": "中",
+    "domains": [
+      "ebid.chinatowercom.cn"
+    ],
+    "evidenceRows": [],
     "notes": "公开页面可访问，待验证稳定检索路径。"
   },
   {
@@ -205,6 +293,10 @@
     "authoritative": true,
     "scope": "中国移动及四川移动采购",
     "priority": "高",
+    "domains": [
+      "b2b.10086.cn"
+    ],
+    "evidenceRows": [],
     "notes": "官方平台，待解决公开检索接口访问限制。"
   },
   {
@@ -218,6 +310,10 @@
     "authoritative": true,
     "scope": "成都高投集团采购",
     "priority": "中",
+    "domains": [
+      "rpt.cdhtgroup.com"
+    ],
+    "evidenceRows": [],
     "notes": "集团电子招采平台，待验证检索接口。"
   },
   {
@@ -231,6 +327,10 @@
     "authoritative": true,
     "scope": "四川大学校级招投标与采购",
     "priority": "中",
+    "domains": [
+      "cg.scu.edu.cn"
+    ],
+    "evidenceRows": [],
     "notes": "专门的招投标与采购中心，不按普通院系新闻页处理；待验证稳定检索路径。"
   },
   {
@@ -244,7 +344,14 @@
     "authoritative": true,
     "scope": "东方电气集团采购",
     "priority": "高",
-    "notes": "门户入口为https://www.decsc.cn/；已通过官方接口核验5G网络布局优化成交公告。"
+    "domains": [
+      "nsrm.dongfang.com",
+      "www.decsc.cn"
+    ],
+    "evidenceRows": [
+      25
+    ],
+    "notes": "门户入口为https://www.decsc.cn/；已通过官方接口核验5G网络布局优化成交公告。门户详情页为单页应用（#/eprocurementportal/detail?columnId=cgjggg&type=fzbxx&contentId=...），接入需复用官方接口。"
   },
   {
     "id": "scbid",
@@ -257,6 +364,14 @@
     "authoritative": false,
     "scope": "项目业主和代理机构自主发布的市场化采购信息",
     "priority": "高",
-    "notes": "市场化信息发布/交易平台，并非当前政府指定媒介；命中四川凌曜5G专网项目，正文部分会员可见。"
+    "domains": [
+      "www.scbid.com",
+      "m.scbid.com"
+    ],
+    "evidenceRows": [
+      9,
+      14
+    ],
+    "notes": "市场化信息发布/交易平台，并非当前政府指定媒介；命中四川凌曜5G专网项目，正文部分会员可见。2026-11-25探测：search_page/zh/search服务端渲染最新公告列表，但?keyword=参数不生效，关键词检索由前端提交；详情页/bx/detail/*.html为静态页，移动站m.scbid.com同源。"
   }
 ]

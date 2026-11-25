@@ -20,7 +20,7 @@ function printHelp(): void {
 5G定制网招标信息监测工具
 
 用法：
-  pnpm collect [--start-date 2026-01-01 | --days 30] [--max-pages 2] [--as-of 2026-11-23]
+  pnpm collect [--start-date 2026-01-01 | --days 30] [--max-pages 2] [--site-pages 10] [--as-of 2026-11-23]
   pnpm validate:sample
   pnpm export [--days 30] [--output 文件.xlsx]
 
@@ -32,6 +32,8 @@ function printHelp(): void {
   --no-sichuan-ggzy      跳过四川省公共资源交易信息网独立检索
   --no-tianfu            跳过天府阳光和四川能源天府阳光采购平台
   --no-telecom           跳过中国电信阳光采购网
+  --no-buyer-sites       跳过采购人官网栏目监测（config/buyer-sites.json）
+  --site-pages N         采购人官网每个栏目最多读取的列表页数，默认10；回溯全年可加大
 `);
 }
 
@@ -49,6 +51,8 @@ async function runCollect(args: string[]): Promise<void> {
     sichuanGgzySearch: !has(args, "--no-sichuan-ggzy"),
     tianfuSearch: !has(args, "--no-tianfu"),
     telecomSearch: !has(args, "--no-telecom"),
+    buyerSites: !has(args, "--no-buyer-sites"),
+    sitePages: Number(optionValue(args, "--site-pages") ?? "10"),
   };
   const startDate = explicitStartDate ?? (explicitDays ? undefined : scope.startDate);
   if (startDate) options.startDate = startDate;
@@ -63,7 +67,8 @@ async function runCollect(args: string[]): Promise<void> {
   console.log(`候选URL：${summary.candidatesDiscovered}；详情成功：${summary.detailFetchSucceeded}；失败：${summary.detailFetchFailed}`);
   console.log(`纳入：${summary.includedCount}；待核实：${summary.pendingCount}；排除：${summary.excludedCount}`);
   console.log(`数据库：${summary.databasePath}`);
-  console.log(`Excel：${summary.outputPath ?? "导出失败"}`);
+  console.log(`Excel（本次窗口）：${summary.outputPath ?? "导出失败"}`);
+  console.log(`Excel（全年最新）：${summary.latestOutputPath ?? "未生成"}`);
   if (summary.errors.length) {
     console.log("限制/错误：");
     for (const error of summary.errors) console.log(`- ${error}`);
@@ -100,7 +105,7 @@ async function runExport(args: string[]): Promise<void> {
   try {
     const notices = db.listNotices(windowStart, windowEnd, scope.province);
     const now = new Date().toISOString();
-    await exportWorkbook({
+    const writtenPath = await exportWorkbook({
       filePath,
       notices,
       context: {
@@ -124,7 +129,7 @@ async function runExport(args: string[]): Promise<void> {
         }],
       },
     });
-    console.log(`已导出：${filePath}`);
+    console.log(`已导出：${writtenPath}`);
   } finally {
     db.close();
   }

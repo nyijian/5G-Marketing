@@ -19,7 +19,7 @@ function decoderFor(contentType: string): TextDecoder {
 
 export async function fetchText(
   url: string,
-  options: { timeoutMs?: number; retries?: number; referer?: string } = {},
+  options: { timeoutMs?: number; retries?: number; referer?: string; headers?: Record<string, string> } = {},
 ): Promise<FetchTextResult> {
   const timeoutMs = options.timeoutMs ?? 25_000;
   const retries = options.retries ?? 2;
@@ -35,6 +35,7 @@ export async function fetchText(
         headers: {
           ...DEFAULT_HEADERS,
           ...(options.referer ? { Referer: options.referer } : {}),
+          ...options.headers,
         },
       });
       const contentType = response.headers.get("content-type") ?? "";

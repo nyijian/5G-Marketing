@@ -171,7 +171,9 @@ function noticeType(title: string, breadcrumb: string): { type: string; stage: s
   if (/合同公告|采购合同/.test(value)) return { type: "政府采购合同公告", stage: "合同" };
   if (/更正|变更|延期/.test(value)) return { type: "更正/延期公告", stage: "更正/延期" };
   if (/终止|废标|流标/.test(value)) return { type: "终止/废标公告", stage: "终止/废标" };
-  if (/中标|成交|结果公告/.test(value)) return { type: "中标（成交）结果公告", stage: "结果" };
+  // 采购人官网常用“结果公示”“比选结果公示”，须在“询价”“比选”等方式词之前判定为结果。
+  if (/中标|成交|中选|结果公告|结果公示|采购结果/.test(value)) return { type: "中标（成交）结果公告", stage: "结果" };
+  if (/市场调研|调研公告/.test(value)) return { type: "市场调研公告", stage: "市场调研" };
   if (/竞争性磋商/.test(value)) return { type: "竞争性磋商公告", stage: "采购公告" };
   if (/竞争性谈判/.test(value)) return { type: "竞争性谈判公告", stage: "采购公告" };
   if (/询价/.test(value)) return { type: "询价公告", stage: "采购公告" };
@@ -179,6 +181,8 @@ function noticeType(title: string, breadcrumb: string): { type: string; stage: s
   if (/直接采购公告/.test(value)) return { type: "直接采购公告", stage: "采购公告" };
   if (/直接采购公示/.test(value)) return { type: "直接采购公示", stage: "直接采购公示" };
   if (/公开招标|招标公告/.test(value)) return { type: "公开招标公告", stage: "采购公告" };
+  if (/比选/.test(value)) return { type: "比选公告", stage: "采购公告" };
+  if (/采购公告|采购邀请|招标邀请/.test(value)) return { type: "采购公告", stage: "采购公告" };
   return { type: "其他公告", stage: "其他" };
 }
 

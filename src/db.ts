@@ -17,6 +17,8 @@ const SICHUAN_DEDICATED_SOURCES = new Set<SourceKey>([
   "chinatelecom",
   "tianfu",
   "scenergy",
+  // buyer-sites.json只登记四川采购人官网。
+  "buyersite",
 ]);
 
 const SICHUAN_PLACE_PATTERN =
@@ -449,6 +451,10 @@ export class MonitorDatabase {
       primary.discoveryMethod = methods.join("；");
       primary.discoveryScope = scopes.join("；");
       primary.alternateSourceUrls = links;
+      primary.firstSeenAt = group
+        .map((item) => item.firstSeenAt)
+        .filter(Boolean)
+        .sort()[0] ?? primary.firstSeenAt;
       return primary;
     }).sort((a, b) => Date.parse(b.publishAt ?? "") - Date.parse(a.publishAt ?? ""));
   }
@@ -498,6 +504,7 @@ export class MonitorDatabase {
       effectiveSubmissionDeadline: text("submission_deadline"),
       latestCorrectionUrl: null,
       alternateSourceUrls: [],
+      firstSeenAt: text("first_seen_at") ?? "",
     };
   }
 

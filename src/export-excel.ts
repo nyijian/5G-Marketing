@@ -12,6 +12,8 @@ export interface ExportContext {
   windowEnd: string;
   regionScope: string;
   providers: ProviderOutcome[];
+  /** 本次采集开始时间；首次发现时间不早于它的记录标为“本次新发现”。仅重新导出时不填。 */
+  newSince?: string;
 }
 
 const HEADER_FILL = { type: "pattern", pattern: "solid", fgColor: { argb: "FF1F4E78" } } as const;
@@ -60,6 +62,7 @@ function addNoticeSheet(
   name: string,
   notices: StoredNotice[],
   asOf: string,
+  newSince: string | undefined,
 ): void {
   const sheet = workbook.addWorksheet(name, { properties: { tabColor: { argb: name === "监测清单" ? "FF70AD47" : "FFA5A5A5" } } });
   sheet.columns = [
@@ -103,6 +106,8 @@ function addNoticeSheet(
     { header: "原文链接", key: "sourceUrl" },
     { header: "省级/原始平台链接", key: "originUrl" },
     { header: "其他来源链接", key: "alternateSourceUrls" },
+    { header: "首次发现时间", key: "firstSeenAt" },
+    { header: "本次新发现", key: "isNew" },
     { header: "最近抓取时间", key: "fetchedAt" },
   ];
 
@@ -155,8 +160,13 @@ function addNoticeSheet(
       sourceUrl: { text: "查看原文", hyperlink: notice.sourceUrl },
       originUrl: notice.originUrl ? { text: "查看原始平台", hyperlink: notice.originUrl } : "",
       alternateSourceUrls: notice.alternateSourceUrls.join("\n"),
+      firstSeenAt: chinaDateTimeDisplay(notice.firstSeenAt || null),
+      isNew: newSince ? (notice.firstSeenAt >= newSince ? "是" : "否") : "",
       fetchedAt: chinaDateTimeDisplay(notice.fetchedAt),
     });
+    if (row.getCell("isNew").value === "是") {
+      row.getCell("isNew").fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFC6EFCE" } };
+    }
     for (const key of ["budgetCny", "ceilingCny", "awardAmount"]) {
       row.getCell(key).numFmt = "#,##0.00";
     }
@@ -237,15 +247,35 @@ function addDefinitionsSheet(workbook: ExcelJS.Workbook): void {
     { field: "公开搜索", description: "搜索引擎索引不实时且分页/总量不透明，只作为新来源与详情URL发现补充，不能代表平台全量。" },
     { field: "固定验证种子", description: "用户指定样本和首轮已核验URL，仅用于端到端回归与站内检索受限时兜底。" },
     { field: "跨来源合并", description: "同一项目编号、公告阶段和标包在多个平台出现时，清单合并为一行，并保留其他来源链接；数据库仍分别保存各平台记录。" },
+    { field: "首次发现时间", description: "该公告第一次被采集入库的时间（北京时间），不是发布日期；发布较早但今天才找到的公告属于“补录/迟到发现”。" },
+    { field: "本次新发现", description: "首次发现时间不早于本次采集开始时间即为“是”，用于每日查看新增；仅从数据库重新导出（pnpm export）时留空。" },
+    { field: "采购人官网", description: "来源平台为医院、卫健委等名称的记录来自采购人官网栏目监测（config/buyer-sites.json），不计入招标发布平台覆盖。" },
   ]);
   configureSheet(sheet);
 }
 
+/** Windows下目标文件正被Excel打开时另存为带时间戳的新文件，不覆盖、不报错退出。 */
+async function writeWorkbookSafely(workbook: ExcelJS.Workbook, filePath: string): Promise<string> {
+  try {
+    await workbook.xlsx.writeFile(filePath);
+    return filePath;
+  } catch (error) {
+    const code = error && typeof error === "object" && "code" in error ? String(error.code) : "";
+    if (code !== "EBUSY") throw error;
+    const timestamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
+    const fallback = filePath.replace(/\.xlsx$/i, `_更新_${timestamp}.xlsx`);
+    await workbook.xlsx.writeFile(fallback);
+    console.warn(`目标Excel正在被占用，已改存为：${fallback}`);
+    return fallback;
+  }
+}
+
+/** 返回实际写入的文件路径。 */
 export async function exportWorkbook(input: {
   filePath: string;
   notices: StoredNotice[];
   context: ExportContext;
-}): Promise<void> {
+}): Promise<string> {
   await mkdir(path.dirname(input.filePath), { recursive: true });
   const workbook = new ExcelJS.Workbook();
   workbook.creator = "5G定制网招标信息监测工具";
@@ -256,9 +286,9 @@ export async function exportWorkbook(input: {
 
   const included = input.notices.filter((notice) => notice.relevance !== "排除");
   const excluded = input.notices.filter((notice) => notice.relevance === "排除");
-  addNoticeSheet(workbook, "监测清单", included, input.context.asOf);
-  addNoticeSheet(workbook, "未纳入候选", excluded, input.context.asOf);
+  addNoticeSheet(workbook, "监测清单", included, input.context.asOf, input.context.newSince);
+  addNoticeSheet(workbook, "未纳入候选", excluded, input.context.asOf, input.context.newSince);
   addCoverageSheet(workbook, input.context);
   addDefinitionsSheet(workbook);
-  await workbook.xlsx.writeFile(input.filePath);
+  return writeWorkbookSafely(workbook, input.filePath);
 }

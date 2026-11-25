@@ -3,6 +3,7 @@ import path from "node:path";
 import {
   databasePath,
   defaultOutputPath,
+  latestOutputFile,
   latestRunPath,
   loadDiscoverySeeds,
   loadKeywords,
@@ -11,6 +12,7 @@ import {
 } from "./config.js";
 import { MonitorDatabase } from "./db.js";
 import { discoverFromPublicSearch, seedOutcome } from "./discovery/bing-search.js";
+import { discoverFromBuyerSites, fetchBuyerSiteDetailHtml } from "./discovery/buyer-sites.js";
 import { discoverFromCcgpSearch } from "./discovery/ccgp-search.js";
 import { discoverFromChinaTelecom } from "./discovery/chinatelecom-search.js";
 import { mergeCandidates } from "./discovery/common.js";
@@ -50,6 +52,9 @@ export interface CollectOptions {
   sichuanGgzySearch: boolean;
   tianfuSearch: boolean;
   telecomSearch: boolean;
+  buyerSites: boolean;
+  /** 采购人官网每个栏目最多读取的列表页数。 */
+  sitePages: number;
 }
 
 function asOfDate(value?: string): { instant: Date; chinaIsoValue: string; dateOnly: boolean } {
@@ -90,6 +95,9 @@ export async function collect(options: CollectOptions): Promise<RunSummary> {
   }
   if (!Number.isInteger(options.maxPages) || options.maxPages < 1 || options.maxPages > 50) {
     throw new Error("--max-pages 必须是 1 到 50 的整数");
+  }
+  if (!Number.isInteger(options.sitePages) || options.sitePages < 1 || options.sitePages > 200) {
+    throw new Error("--site-pages 必须是 1 到 200 的整数");
   }
 
   const asOf = asOfDate(options.asOf);
@@ -237,6 +245,19 @@ export async function collect(options: CollectOptions): Promise<RunSummary> {
       providers.push(result.outcome);
     }
 
+    if (options.buyerSites) {
+      const result = await discoverFromBuyerSites({
+        keywords,
+        startDate,
+        endDate,
+        maxPages: options.sitePages,
+        province: scope.province,
+        regionCode: scope.regionCode,
+      });
+      allCandidates.push(...result.candidates);
+      providers.push(...result.outcomes);
+    }
+
     providers.push(seedOutcome(seedCandidates.length));
     for (const outcome of providers) {
       db.saveProviderOutcome(runId, outcome);
@@ -255,6 +276,8 @@ export async function collect(options: CollectOptions): Promise<RunSummary> {
               ? parseCcgpDetail(await fetchSichuanGgzyDetailHtml(candidate), candidate)
               : candidate.sourceKey === "tianfu" || candidate.sourceKey === "scenergy"
                 ? parseCcgpDetail(await fetchTianfuDetailHtml(candidate), candidate)
+                : candidate.sourceKey === "buyersite"
+                  ? parseCcgpDetail(await fetchBuyerSiteDetailHtml(candidate), candidate)
             : parseCcgpDetail(
               (await fetchText(candidate.url, {
                 retries: 2,
@@ -287,10 +310,9 @@ export async function collect(options: CollectOptions): Promise<RunSummary> {
       detailFailed: detailFetchFailed,
       included: includedCount + pendingCount,
     });
-    outputPath = path.resolve(options.output ?? defaultOutputPath(endDate, startDate));
     try {
-      await exportWorkbook({
-        filePath: outputPath,
+      outputPath = await exportWorkbook({
+        filePath: path.resolve(options.output ?? defaultOutputPath(endDate, startDate)),
         notices,
         context: {
           runId,
@@ -300,12 +322,37 @@ export async function collect(options: CollectOptions): Promise<RunSummary> {
           windowEnd,
           regionScope: scope.province,
           providers,
+          newSince: startedAt,
         },
       });
     } catch (error) {
       errors.push(`Excel导出失败：${error instanceof Error ? error.message : String(error)}`);
       outputPath = null;
       status = detailFetchSucceeded > 0 ? "partial" : "failed";
+    }
+
+    // 固定文件名的“最新”清单：不论本次窗口多长，都按配置开始日期导出全年数据，并标出本次新发现。
+    let latestOutputPath: string | null = null;
+    if (outputPath) {
+      const yearStart = asChinaStartOfDay(scope.startDate);
+      try {
+        latestOutputPath = await exportWorkbook({
+          filePath: latestOutputFile(),
+          notices: windowStart === yearStart ? notices : db.listNotices(yearStart, windowEnd, scope.province),
+          context: {
+            runId,
+            runStatus: `${status}（本次采集窗口${startDate}至${endDate}；本表为${scope.startDate}起全量）`,
+            asOf: asOf.chinaIsoValue,
+            windowStart: yearStart,
+            windowEnd,
+            regionScope: scope.province,
+            providers,
+            newSince: startedAt,
+          },
+        });
+      } catch (error) {
+        errors.push(`最新清单导出失败：${error instanceof Error ? error.message : String(error)}`);
+      }
     }
 
     const finishedAt = new Date().toISOString();
@@ -328,6 +375,7 @@ export async function collect(options: CollectOptions): Promise<RunSummary> {
       insertedCount,
       updatedCount,
       outputPath,
+      latestOutputPath,
       databasePath: dbPath,
       providers,
       errors,

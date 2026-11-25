@@ -50,7 +50,7 @@ Default to Sichuan and Beijing time. Honor another explicit region, period, cuto
 - Keep acquisition and response deadlines separate and calculate their statuses separately in Asia/Shanghai.
 - Candidate or first-place notices are not final awards. Contracts, results, corrections and terminations retain their own stage.
 - Different lots remain separate. Different lifecycle stages remain separate in the notice table.
-- Buyer websites and public search are verification or discovery channels, not formal tender-platform coverage.
+- Buyer websites (`config/buyer-sites.json`) are monitored as long-tail sources, and public search is a discovery channel; neither counts as formal tender-platform coverage. Third-party aggregators (`config/clue-sites.json`) are manual clue sources only.
 - If attachments were not read, say so. Do not claim their requirements as facts.
 - Every included or pending item needs a source link, evidence label and collection scope.
 - Do not infer that Sichuan Telecom saw, bid, abandoned or lost an opportunity unless internal process data proves it.

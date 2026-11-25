@@ -14,7 +14,9 @@ Do not count buyer websites, hospital pages, group news, search engines, third-p
 
 Public search is a discovery channel. It may find an official detail page or a new source, but its returned results do not prove complete coverage of the underlying platform.
 
-Buyer sites are `buyer_site / verification_only`. Use them to verify small internal tenders, fill long-tail gaps and find a formal platform. If no corresponding platform is found, say so; do not invent one.
+Buyer sites are `buyer_site / long_tail_source` in `config/buyer-sites.json`. Active ones are monitored automatically through their procurement list pages to fill long-tail gaps (small internal tenders), and are still used to verify notices and look for a formal platform. They never count toward platform coverage. If no corresponding platform is found, say so; do not invent one.
+
+Third-party aggregators and news sites are `clue_only` in `config/clue-sites.json`. Use them by hand to find leads, then trace each lead to an official platform or buyer page. Never collect them automatically or cite them as evidence.
 
 ## 2. Current platform catalog
 
@@ -66,20 +68,20 @@ The catalog contains 20 formal platforms in total. Except for Sichuan Tender, en
 
 ## 3. Buyer-site long tail
 
-Currently verified buyer sites include:
+| Buyer site | Status | Note |
+|---|---|---|
+| 自贡市妇幼保健院 | `active` | card list; date split into year-month and day |
+| 内江市卫生健康委员会 | `active` | page 2 file suffix is `_2` |
+| 泸州市人民医院 | `active` | HTTP only; 6 items per page |
+| 四川省妇幼保健院 | `active` | requires `Cookie: visited=1`; high volume |
+| 成都市金牛区人民医院 | `active` | three columns; HTTP only |
+| 成都市新都区第二人民医院 | `active` | date appended to title |
+| 成都市新都区第三人民医院 | `active` | two columns |
+| 四川大学华西医院 | `active` | first page only; some notices link out to `ecp.vhepro.com` |
+| 乐山市人民医院 | `needs_research` | detail pages readable; list entry not located |
+| 广元市文化旅游康养发展集团招采栏目 | `blocked` | WAF |
 
-- 四川大学华西医院;
-- 成都市新都区第二人民医院;
-- 成都市新都区第三人民医院;
-- 乐山市人民医院;
-- 成都市金牛区人民医院;
-- 泸州市人民医院;
-- 四川省妇幼保健院;
-- 自贡市妇幼保健院;
-- 内江市卫生健康委员会;
-- 广元市文化旅游康养发展集团招采栏目.
-
-These are excluded from formal platform counts. Many known hospital projects were small internal tenders with no synchronized government or public-resource page.
+A live run on 2026-11-25 recovered all eight buyer-site projects among the 37 audited records. These sites are excluded from formal platform counts. Many known hospital projects were small internal tenders with no synchronized government or public-resource page. Title-based filtering can miss a notice whose title omits 5G; generic titles such as “项目结果公示” are opened and classified from the body.
 
 The project currently uses the Sichuan 2024 procurement-threshold context as a verification aid: province-level and Chengdu municipal goods/services 500,000 CNY; other municipal and county levels 300,000 CNY. Keep the applicable year and recheck after a policy update. A threshold explains why a buyer site may be the only page; it does not make that site a formal platform.
 

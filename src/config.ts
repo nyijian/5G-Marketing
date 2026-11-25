@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import type { CollectionScope, DiscoveryCandidate, KnownSample, SourceKey } from "./types.js";
+import type { BuyerSite, CollectionScope, DiscoveryCandidate, KnownSample, SourceKey } from "./types.js";
 
 async function readJson<T>(relativePath: string): Promise<T> {
   const absolutePath = path.resolve(process.cwd(), relativePath);
@@ -17,6 +17,10 @@ export function loadKnownSamples(): Promise<KnownSample[]> {
 
 export function loadScope(): Promise<CollectionScope> {
   return readJson<CollectionScope>("config/scope.json");
+}
+
+export async function loadBuyerSites(): Promise<BuyerSite[]> {
+  return (await readJson<{ sites: BuyerSite[] }>("config/buyer-sites.json")).sites;
 }
 
 export async function loadDiscoverySeeds(
@@ -62,6 +66,11 @@ export function databasePath(): string {
 export function defaultOutputPath(asOfDate: string, startDate?: string): string {
   const range = startDate ? `${startDate}至${asOfDate}` : asOfDate;
   return path.resolve(process.cwd(), "output", `四川5G专网采购清单_${range}.xlsx`);
+}
+
+/** 每次采集后覆盖的固定文件名全量清单，日常只看这一份即可。 */
+export function latestOutputFile(): string {
+  return path.resolve(process.cwd(), "output", "四川5G专网采购清单_最新.xlsx");
 }
 
 export function latestRunPath(): string {

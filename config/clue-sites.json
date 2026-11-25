@@ -1,0 +1,60 @@
+{
+  "description": "第三方聚合站和新闻站：只用于人工发现线索，再回溯到招标发布平台或采购人官网的原文。不自动采集、不计入平台覆盖、不能作为相关性或金额的证据来源。这类站点普遍有人机验证或会员限制，用户协议通常也不允许批量抓取。evidenceRows对应《2026历史项目核验_平台分层》37条样本的序号。",
+  "sites": [
+    {
+      "id": "bidcenter",
+      "name": "采招网",
+      "domains": ["www.bidcenter.com.cn", "m.bidcenter.com.cn"],
+      "kind": "third_party_aggregator",
+      "role": "clue_only",
+      "collectionStatus": "manual_only",
+      "access": "程序访问被重定向到shuju.bidcenter.com.cn人机验证页",
+      "evidenceRows": [3, 10, 15, 26],
+      "notes": "第3条观音岩、第10条亿航“5G+智慧办公”、第15条川锅5G工控专网、第26条广元5G物联网流量服务的线索来源；其中第10、15条至今只有该站线索，原始发布平台未识别，是补源重点。"
+    },
+    {
+      "id": "qianlima",
+      "name": "千里马招标网",
+      "domains": ["www.qianlima.com"],
+      "kind": "third_party_aggregator",
+      "role": "clue_only",
+      "collectionStatus": "manual_only",
+      "access": "页面可访问，含前端脚本渲染；未验证完整正文是否需要登录",
+      "evidenceRows": [31],
+      "notes": "第31条布拖县统计局5G农普服务的唯一线索；原始PDF发布平台未识别。"
+    },
+    {
+      "id": "czhaobiao",
+      "name": "czhaobiao.com招标信息聚合站",
+      "domains": ["www.czhaobiao.com"],
+      "kind": "third_party_aggregator",
+      "role": "clue_only",
+      "collectionStatus": "manual_only",
+      "access": "程序访问被WAF拦截",
+      "evidenceRows": [1],
+      "notes": "第1条自贡市妇幼保健院5G网络建设的补充线索；原文已在采购人官网核实。"
+    },
+    {
+      "id": "gxzbcg",
+      "name": "gxzbcg.com.cn招标信息聚合站",
+      "domains": ["www.gxzbcg.com.cn"],
+      "kind": "third_party_aggregator",
+      "role": "clue_only",
+      "collectionStatus": "manual_only",
+      "access": "静态页面可读，但为全国范围转载信息，噪声高",
+      "evidenceRows": [8],
+      "notes": "第8条映秀湾等电站项目的补充线索；对应国家电网ECP具体标包尚未定位。"
+    },
+    {
+      "id": "cnpc-news",
+      "name": "中国石油新闻中心",
+      "domains": ["news.cnpc.com.cn"],
+      "kind": "news_site",
+      "role": "clue_only",
+      "collectionStatus": "excluded",
+      "access": "静态页面可读",
+      "evidenceRows": [5],
+      "notes": "只有2023年大竹分厂工业5G建设案例报道，不是采购公告；第5条已标为疑似错误记录。新闻只能作为市场线索，不能转写为采购项目。"
+    }
+  ]
+}
